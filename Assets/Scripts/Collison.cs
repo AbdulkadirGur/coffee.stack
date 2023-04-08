@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
-    // Start is called before the first frame update
+  
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         
@@ -20,7 +20,7 @@ public class Collision : MonoBehaviour
     {
         if (other.gameObject.tag == "Cube")
         {
-            if (!MechanicalManager.instance.cubes.Contains(other.gameObject))
+            if (!MechanicalManager.instance.objeler.Contains(other.gameObject))// objeler ýcý ýce gýrmemsýný engellemek ve yený objenýn dýger objelerý yakalayabýlmesýný saglayan kod.
             {
                 other.GetComponent<BoxCollider>().isTrigger = false;
                 other.gameObject.tag = "Untagged";
@@ -28,7 +28,7 @@ public class Collision : MonoBehaviour
                 other.gameObject.AddComponent<Rigidbody>();
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-                MechanicalManager.instance.StackCube(other.gameObject, MechanicalManager.instance.cubes.Count - 1);
+                MechanicalManager.instance.StackObje(other.gameObject, MechanicalManager.instance.objeler.Count - 1);
 
 
             }

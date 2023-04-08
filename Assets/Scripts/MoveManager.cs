@@ -32,12 +32,13 @@ public class MoveManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            GameObject firstCube = MechanicalManager.instance.cubes[0];
+            GameObject firstCube = MechanicalManager.instance.objeler[0];// hit.point degerini degistirebilmek icin hitVec olusturuldu;
             Vector3 hitVec = hit.point;
             hitVec.y = firstCube.transform.localPosition.y;
             hitVec.z = firstCube.transform.localPosition.z;
 
             firstCube.transform.localPosition = Vector3.MoveTowards(firstCube.transform.localPosition, hitVec, Time.deltaTime * swipeSpeed);
+            // local olmasinin sebebi player objesinin bir parenti olmasi ve tum childler ayni davranmasini istedigimiz icin
         }
     }
 }

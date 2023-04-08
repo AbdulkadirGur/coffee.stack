@@ -6,9 +6,9 @@ using DG.Tweening;
 public class MechanicalManager : MonoBehaviour
 {
     public static MechanicalManager instance;
-    public float movementDelay = 0.25f;
+    public float movementDelay = 0.25f;// Gelen objelerin hareketlerinin delay suresi
 
-    public List<GameObject> cubes = new List<GameObject>();
+    public List<GameObject> objeler = new List<GameObject>();
     private void Awake()
     {
         if (instance == null)
@@ -21,7 +21,7 @@ public class MechanicalManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         if (Input.GetButton("Fire1"))
@@ -34,47 +34,47 @@ public class MechanicalManager : MonoBehaviour
         }
     }
 
-    public void StackCube(GameObject other, int index)
+    public void StackObje(GameObject other, int index)          // Objeler toplaninca neler olsun? other olmasinin sebebi collisondaki otherdan geldigini anlamak icin.
     {
-        other.transform.parent = transform;
-        Vector3 newPos = cubes[index].transform.localPosition;
+        other.transform.parent = transform;                      // other'in Parentini AllObjects  yapiyoruz.Tum kuplerin AllObjects altina siralanmasi icin.
+        Vector3 newPos = objeler[index].transform.localPosition; 
         newPos.z += 1;
         other.transform.localPosition = newPos;
-        cubes.Add(other);
+        objeler.Add(other);
         StartCoroutine(MakeObjectsBigger());
 
     }
 
-    private IEnumerator MakeObjectsBigger()
+    private IEnumerator MakeObjectsBigger() // kucuk býr delay vererek toplanan objelerýn anýden buyuyup kuculmesýný saglýyoruz.
     {
-        for (int i = cubes.Count-1; i > 0; i--)
+        for (int i = objeler.Count-1; i > 0; i--)
         {
-            int index = i;
+            int index = i;   // DoScale icine i degeri yanlis gelebilir bunu onlemek icin bir onlem.
             Vector3 scale = new Vector3(1, 1, 1);
             scale *= 1.5f;
 
-            cubes[index].transform.DOScale(scale, 0.1f).OnComplete(() => cubes[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f));
+            objeler[index].transform.DOScale(scale, 0.1f).OnComplete(() => objeler[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f));
         yield return new WaitForSeconds(0.05f);
         }
     }
     
     private void MoveListElements()
     {
-        for (int i = 1; i < cubes.Count; i++)
+        for (int i = 1; i < objeler.Count; i++)
         {
-            Vector3 pos = cubes[i].transform.localPosition;
-            pos.x = cubes[i - 1].transform.localPosition.x;
-            cubes[i].transform.DOLocalMove(pos, movementDelay);
+            Vector3 pos = objeler[i].transform.localPosition;
+            pos.x = objeler[i - 1].transform.localPosition.x;
+            objeler[i].transform.DOLocalMove(pos, movementDelay);
 
         }
     }
     private void MoveOrgin()
     {
-        for (int i = 1; i < cubes.Count; i++)
+        for (int i = 1; i < objeler.Count; i++)
         {
-            Vector3 pos = cubes[i].transform.localPosition;
-            pos.x = cubes[0].transform.localPosition.x;
-            cubes[i].transform.DOLocalMove(pos, 0.70f );
+            Vector3 pos = objeler[i].transform.localPosition;
+            pos.x = objeler[0].transform.localPosition.x;
+            objeler[i].transform.DOLocalMove(pos, 0.70f );
 
         }
     }
