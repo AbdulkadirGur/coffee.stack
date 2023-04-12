@@ -44,8 +44,8 @@ public class CameraFollow : MonoBehaviour
     }
     private void MoveTheSecondCamera()
     {
-        GetComponent<CinemachineVirtualCamera>().Follow = Colison.instance.paralar[Colison.instance.paralar.Count - 1].transform;
-        GetComponent<CinemachineVirtualCamera>().LookAt = Colison.instance.paralar[Colison.instance.paralar.Count - 1].transform;
+        //GetComponent<CinemachineVirtualCamera>().Follow = Colison.instance.paralar[Colison.instance.paralar.Count - 1].transform;
+        //GetComponent<CinemachineVirtualCamera>().LookAt = Colison.instance.paralar[Colison.instance.paralar.Count - 1].transform;
 
        /* target2 = Colison.instance.paralar[Colison.instance.paralar.Count - 1].transform;
         Vector3 targetMove = target2.position + offesetVektor;

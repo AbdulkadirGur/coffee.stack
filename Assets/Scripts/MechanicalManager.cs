@@ -50,10 +50,10 @@ public class MechanicalManager : MonoBehaviour
         for (int i = objeler.Count-1; i > 0; i--)
         {
             int index = i;   // DoScale icine i degeri yanlis gelebilir bunu onlemek icin bir onlem.
-            Vector3 scale = new Vector3(1, 1, 1);
-            scale *= 1.5f;
+            Vector3 scale = new Vector3(0.3f, 0.3f, 0.3f);
+            scale *= 0.3f;
 
-            objeler[index].transform.DOScale(scale, 0.1f).OnComplete(() => objeler[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f));
+            objeler[index].transform.DOScale(scale, 0.1f).OnComplete(() => objeler[index].transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 0.1f));
         yield return new WaitForSeconds(0.05f);
         }
     }
