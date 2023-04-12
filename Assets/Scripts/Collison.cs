@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class Collison : MonoBehaviour
 {
   
     void Start()
@@ -24,7 +24,7 @@ public class Collision : MonoBehaviour
             {
                 other.GetComponent<BoxCollider>().isTrigger = false;
                 other.gameObject.tag = "Untagged";
-                other.gameObject.AddComponent<Collision>();
+                other.gameObject.AddComponent<Collison>();
                 other.gameObject.AddComponent<Rigidbody>();
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
