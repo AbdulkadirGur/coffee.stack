@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveManager : MonoBehaviour
@@ -7,6 +8,20 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private float swipeSpeed; //kaydýrma hýzý deðiþkeni
     [SerializeField] private float moveSpeed; //hareket hýzý deðiþkeni
     [SerializeField] private Camera cam;
+    [SerializeField] private GameObject SecondCam;
+    bool stopflag=false;
+
+
+    public static MoveManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
         cam = Camera.main;
@@ -15,11 +30,19 @@ public class MoveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
-        if (Input.GetButton("Fire1"))
+        if (!stopflag)
         {
-            Move();
+            transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
+            if (Input.GetButton("Fire1"))
+            {
+                Move();
+            }
         }
+        else
+        {
+            transform.position += Vector3.forward * 0 * Time.deltaTime;
+        }
+        
     }
 
     private void Move()
@@ -40,5 +63,9 @@ public class MoveManager : MonoBehaviour
             firstCube.transform.localPosition = Vector3.MoveTowards(firstCube.transform.localPosition, hitVec, Time.deltaTime * swipeSpeed);
             // local olmasinin sebebi player objesinin bir parenti olmasi ve tum childler ayni davranmasini istedigimiz icin
         }
+    }
+    public void StopGame()
+    {
+        stopflag = true;
     }
 }
